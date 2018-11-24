@@ -16,7 +16,7 @@ var settings = [						//Some settings.
 	false,								//Use the GameBoy boot ROM instead of the GameBoy Color boot ROM.
 	false,								//Scale the canvas in JS, or let the browser scale the canvas?
 	true,								//Use image smoothing based scaling?
-    [true, true, true, true]            //User controlled channel enables.
+	[true, true, true, true]            //User controlled channel enables.
 ];
 function start(canvas, ROM) {
 	clearLastEmulation();
@@ -27,6 +27,7 @@ function start(canvas, ROM) {
 	gameboy.start();
 	run();
 }
+let post_process = () => { };
 function run() {
 	if (GameBoyEmulatorInitialized()) {
 		if (!GameBoyEmulatorPlaying()) {
@@ -38,6 +39,7 @@ function run() {
 			gbRunInterval = setInterval(function () {
 				if (!document.hidden && !document.msHidden && !document.mozHidden && !document.webkitHidden) {
 					gameboy.run();
+					post_process();
 				}
 			}, settings[6]);
 		}
@@ -323,7 +325,7 @@ function decodeBlob(blobData) {
 							blobLength = ((blobData.charCodeAt(index + 3) & 0xFF) << 24) | ((blobData.charCodeAt(index + 2) & 0xFF) << 16) | ((blobData.charCodeAt(index + 1) & 0xFF) << 8) | (blobData.charCodeAt(index) & 0xFF);
 							index += 4;
 							if (index + blobLength <= length) {
-								blobProperties.blobs[blobsCount].blobContent =  blobData.substring(index, index + blobLength);
+								blobProperties.blobs[blobsCount].blobContent = blobData.substring(index, index + blobLength);
 								index += blobLength;
 							}
 							else {

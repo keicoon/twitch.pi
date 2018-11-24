@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <Style>
+        @font-face{
+        font-family:"daum"; /*폰트 패밀리 이름 추가*/
+        src:url("resources/font/Daum_Regular.ttf"); /*폰트 파일 주소*/
+    }
+    body{
+        background-color: black;
+        font-familly:"daum" !important;
+    }
+    </Style>
+    <meta charset="utf-8">
+    <script src="js/other/windowStack.js"></script>
+    <script src="js/other/terminal.js"></script>
+    <script src="js/other/gui.js"></script>
+    <script src="js/other/base64.js"></script>
+    <script src="js/other/json2.js"></script>
+    <script src="js/other/swfobject.js"></script>
+    <script src="js/other/resampler.js"></script>
+    <script src="js/other/XAudioServer.js"></script>
+    <script src="js/other/resize.js"></script>
+    <script src="js/GameBoyCore.js"></script>
+    <script src="js/GameBoyIO.js"></script>
+    <script src="index.js"></script>
+    <script src="extension/twitch.js"></script>
+</head>
+
+<body style="bgcolor: black;">
+    <canvas id="mainCanvas" width="160" height="144"></canvas>
+    <div id="chat_board" style="left:500px; top:20px; position:fixed;">
+        <div style="border: 2px solid white; padding: 2px;">
+            <p style="color: white;" id="info"></p>
+            <p style="color: blue;" id="info_key"></p>
+        </div>
+        <div style="color: red; border: 2px solid white; padding: 2px;font-weight: bold; font-size:20px" id="time"></div>
+        <div style="color: white;border: 2px solid white; padding: 2px;" id="chat"></div>
+    </div>
+    <br>
+    <input type="file" id="getfile"></input>
+</body>
+
+</html>
