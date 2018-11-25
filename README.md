@@ -5,6 +5,10 @@
 ![](https://github.com/keicoon/twitch.pi/blob/master/capture/1.png)
 
 
+## twitch-js
+Repository : https://github.com/twitch-apis/twitch-js
+License : https://github.com/twitch-apis/twitch-js/blob/master/LICENSE
+
 ## GameBoy-Online
 JavaScript GameBoy Color Emulator
 =================================
