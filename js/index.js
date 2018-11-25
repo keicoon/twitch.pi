@@ -14,7 +14,7 @@ window.onload = function () {
         reader.onload = function () {
             console.log('starting to load rom');
             start(mainCanvas, reader.result);
-            console.log('regist options');
+            console.log('registered the options');
             register_options();
         };
     };
@@ -30,8 +30,8 @@ function register() {
 }
 
 function register_options() {
-    const speed = 1.5;
-    gameboy.setSpeed(Math.max(parseFloat(speed), 0.001))
+    // const speed = 1.5;
+    // gameboy.setSpeed(Math.max(parseFloat(speed), 0.001))
 }
 // @advanced
 post_process = () => {

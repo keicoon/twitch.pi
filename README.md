@@ -1,10 +1,11 @@
 ## twitch.pi
 - 실험중인 프로젝트입니다.
 
-## capture
+## Capture
 ![](https://github.com/keicoon/twitch.pi/blob/master/capture/1.png)
 
 
+## GameBoy-Online
 JavaScript GameBoy Color Emulator
 =================================
 
