@@ -2,9 +2,9 @@ let script = document.createElement('script');
 script.type = 'text/javascript';
 script.src = 'https://unpkg.com/twitch-js@1.2.5/dist/twitch-js.min.js';
 script.onload = function () {
-
+    let ACTION2TEXT_MAP = {};
     function register_IO() {
-        let ACTION2TEXT_MAP = {};
+
         let wrap_keyevent = { "keyCode": 0, "preventDefault": () => { } };
         let is_key_down = false;
 

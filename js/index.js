@@ -12,7 +12,7 @@ window.onload = function () {
         };
     };
 }
-
+let DEBUG_MESSAGES = false, DEBUG_WINDOWING = false;
 function pre_init() {
     function init_IO() {
         document.addEventListener("keydown", keyDown, false);
