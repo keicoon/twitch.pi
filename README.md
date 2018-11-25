@@ -6,7 +6,7 @@
 
 
 ## twitch-js
-Repository : https://github.com/twitch-apis/twitch-js
+Repository : https://github.com/twitch-apis/twitch-js  
 License : https://github.com/twitch-apis/twitch-js/blob/master/LICENSE
 
 ## GameBoy-Online
