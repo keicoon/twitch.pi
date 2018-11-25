@@ -7,15 +7,15 @@ window.onload = function () {
     var file = document.getElementById('getfile');
     file.onchange = function () {
         var fileList = file.files;
-
         // 읽기
         var reader = new FileReader();
         reader.readAsBinaryString(fileList[0]);
-
         //로드 한 후
         reader.onload = function () {
             console.log('starting to load rom');
             start(mainCanvas, reader.result);
+            console.log('regist options');
+            register_options();
         };
     };
 }
@@ -27,6 +27,11 @@ function register() {
     mainCanvas.height *= SCALE;
 
     registerIO();
+}
+
+function register_options() {
+    const speed = 1.5;
+    gameboy.setSpeed(Math.max(parseFloat(speed), 0.001))
 }
 // @advanced
 post_process = () => {
@@ -60,25 +65,38 @@ function registerIO() {
     }, false);
 }
 
-const ACTIONS = {
-    "LEFT": 37,
-    "RIGHT": 39,
-    "UP": 38,
-    "DOWN": 40,
-    "A": 88,
-    "B": 90
-};
-const action_keys = Object.keys(ACTIONS);
+let ACTION2TEXT_MAP = {};
+{
+    function mapping(key_sets) {
+        const code = key_sets.shift();
+        for (const key of key_sets) {
+            ACTION2TEXT_MAP[key] = code;
+        }
+    }
+    mapping([37, 'LEFT', 'Left', 'left', 'L', 'l']);
+    mapping([38, 'UP', 'Up', 'up', 'U', 'u']);
+    mapping([39, 'RIGHT', 'Right', 'right', 'R', 'r']);
+    mapping([40, 'DOWN', 'Down', 'down', 'D', 'd']);
+    mapping([88, 'A', 'a', 'Z', 'z']);
+    mapping([90, 'B', 'b', 'X', 'x']);
+}
 function is_valid_event(text) {
-    return action_keys.find(key => key == text);
+    return ACTION2TEXT_MAP[text];
 }
 let wrap_keyevent = {
     "keyCode": 0,
     "preventDefault": () => { }
 };
+let is_key_down = false;
 function twich_event(text) {
-    const key = ACTIONS[text];
+    if (is_key_down) return;
+    is_key_down = true;
+
+    const key = ACTION2TEXT_MAP[text];
     wrap_keyevent.keyCode = key;
     keyDown(wrap_keyevent);
-    setTimeout(() => keyUp(wrap_keyevent), 300);
+    setTimeout(() => {
+        keyUp(wrap_keyevent);
+        is_key_down = false;
+    }, 280);
 }

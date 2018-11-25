@@ -1,0 +1,33 @@
+@font-face {
+    font-family:"daum"; /*폰트 패밀리 이름 추가*/
+    src:url("font/Daum_Regular.ttf"); /*폰트 파일 주소*/
+}
+body {
+    background-color: black;
+    font-family:"daum";
+}
+
+.chat_board {
+    left:500px;
+    top:20px;
+    position:fixed;
+}
+
+.frame {
+    border: 2px solid white; padding: 2px;
+}
+
+.time_text {
+    color: red;    
+}
+.normal_text {
+    color: white;
+}
+
+.big {
+    font-weight: bold;
+    font-size: 20px;
+}
+.small {
+    font-size: 12px;
+}

@@ -2,16 +2,7 @@
 <html>
 
 <head>
-    <Style>
-        @font-face{
-        font-family:"daum"; /*폰트 패밀리 이름 추가*/
-        src:url("resources/font/Daum_Regular.ttf"); /*폰트 파일 주소*/
-    }
-    body{
-        background-color: black;
-        font-familly:"daum" !important;
-    }
-    </Style>
+    <link rel="stylesheet" type="text/css" href="css/twitch.css" />
     <meta charset="utf-8">
     <script src="js/other/windowStack.js"></script>
     <script src="js/other/terminal.js"></script>
@@ -28,17 +19,17 @@
     <script src="extension/twitch.js"></script>
 </head>
 
-<body style="bgcolor: black;">
+<body>
     <canvas id="mainCanvas" width="160" height="144"></canvas>
-    <div id="chat_board" style="left:500px; top:20px; position:fixed;">
-        <div style="border: 2px solid white; padding: 2px;">
-            <p style="color: white;" id="info"></p>
-            <p style="color: blue;" id="info_key"></p>
+    <div class="chat_board">
+        <div class="frame">
+            <p class='normal_text' id="info_title"></p>
+            <p class="normal_text small" id="info_keys"></p>
         </div>
-        <div style="color: red; border: 2px solid white; padding: 2px;font-weight: bold; font-size:20px" id="time"></div>
-        <div style="color: white;border: 2px solid white; padding: 2px;" id="chat"></div>
+        <div class="frame time_text big" id="info_time"></div>
+        <div class="frame normal_text" id="info_chat"></div>
     </div>
-    <br>
+    <br><br><br><br>
     <input type="file" id="getfile"></input>
 </body>
 
