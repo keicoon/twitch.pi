@@ -1,15 +1,53 @@
-var head = document.getElementsByTagName('head')[0];
-var script = document.createElement('script');
+let script = document.createElement('script');
 script.type = 'text/javascript';
+script.src = 'https://unpkg.com/twitch-js@1.2.5/dist/twitch-js.min.js';
 script.onload = function () {
-    function regist_info() {
+
+    function register_IO() {
+        let ACTION2TEXT_MAP = {};
+        let wrap_keyevent = { "keyCode": 0, "preventDefault": () => { } };
+        let is_key_down = false;
+
+        function mapping(key_sets) {
+            const code = key_sets.shift();
+            for (const key of key_sets) {
+                ACTION2TEXT_MAP[key] = code;
+            }
+        }
+        mapping([37, 'LEFT', 'Left', 'left', 'L', 'l']);
+        mapping([38, 'UP', 'Up', 'up', 'U', 'u']);
+        mapping([39, 'RIGHT', 'Right', 'right', 'R', 'r']);
+        mapping([40, 'DOWN', 'Down', 'down', 'D', 'd']);
+        mapping([88, 'A', 'a', 'Z', 'z']);
+        mapping([90, 'B', 'b', 'X', 'x']);
+
+        function is_valid_event(text) {
+            return ACTION2TEXT_MAP[text];
+        }
+
+        function twich_event(text) {
+            if (is_key_down) return;
+            is_key_down = true;
+
+            const key = ACTION2TEXT_MAP[text];
+            wrap_keyevent.keyCode = key;
+            keyDown(wrap_keyevent);
+            setTimeout(() => {
+                keyUp(wrap_keyevent);
+                is_key_down = false;
+            }, 280);
+        }
+
+        return { is_valid_event, twich_event }
+    }
+    function register_info() {
         let info = document.getElementById("info_title");
         info.textContent = "Enter a below word in the chat room."
         let info_key = document.getElementById("info_keys");
         info_key.textContent = `[ left / up / right / down / a / b ]`;
-    }
+    };
 
-    function regist_time() {
+    function register_time() {
         let time = document.getElementById("info_time");
         let seconds = 0, minutes = 0, hours = 0;
         setInterval(() => {
@@ -22,12 +60,11 @@ script.onload = function () {
                     hours++;
                 }
             }
-
             time.textContent = `UPTIME : ${(hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds)}`;
         }, 1000);
-    }
+    };
 
-    function reigst_chat() {
+    function reigster_chat() {
         const CODE2TEXT_MAP = {
             37: "< Left > 를 입력.",
             38: "< Up > 를 입력.",
@@ -40,20 +77,20 @@ script.onload = function () {
         let texts = [];
         let chat = document.getElementById("info_chat");
         function update_chat(usename, text) {
-            texts.push(`[${usename}] : ${CODE2TEXT_MAP[ACTION2TEXT_MAP[text]]}`);
+            texts.push(`[${usename}]이 ${CODE2TEXT_MAP[ACTION2TEXT_MAP[text]]}`);
             if (texts.length > MAXIMUM_LEGNTH) {
                 texts.shift();
             }
-
             chat.innerText = texts.join('\n');
         }
 
         return update_chat;
     }
 
-    regist_info();
-    regist_time();
-    const update_chat = reigst_chat();
+    const { is_valid_event, twich_event } = register_IO();
+    register_info();
+    register_time();
+    const update_chat = reigster_chat();
 
     const channel = 'keicoon15';
     // In this example, TwitchJS is included via a <script /> tag, so we can access
@@ -63,7 +100,7 @@ script.onload = function () {
     var options = {
         options: {
             // Debugging information will be outputted to the console.
-            debug: true
+            // debug: true
         },
         connection: {
             reconnect: true,
@@ -88,5 +125,5 @@ script.onload = function () {
     // Finally, connect to the Twitch channel.
     client.connect();
 }
-script.src = 'https://unpkg.com/twitch-js@1.2.5/dist/twitch-js.min.js';
+let head = document.getElementsByTagName('head')[0];
 head.appendChild(script);
